@@ -23,7 +23,7 @@ const Feed = () => {
   // Search states
   const [ searchText, setSearchText] = useState('');
   const [ searchTimeout, setSeachTimeout ] = useState(null);
-  const [ searchedResults, setSearchResults ] = useState([])
+  const [ searchedResults, setSearchedResults ] = useState([])
 
 
   useEffect(()=>{
@@ -53,7 +53,7 @@ const Feed = () => {
     setSeachTimeout(
       setTimeout(() => {
         const searchResult = filterPrompts(e.target.value)
-        setSearchResults(searchResult);
+        setSearchedResults(searchResult);
       }, 500)
     );
   }
@@ -62,40 +62,35 @@ const Feed = () => {
     setSearchText(tagName);
 
     const searchResult = filterPrompts(tagName);
-    setSearchResults(searchResult);
+    setSearchedResults(searchResult);
   }
 
   return (
-    <section className="feed">
-
-      {/* Code for main page big search bar */}
-
-      <form className="relative w-full flex-center">
-        <input 
-          type="text"
-          placeholder="Search for a tag or a username"
+    <section className='feed'>
+      <form className='relative w-full flex-center'>
+        <input
+          type='text'
+          placeholder='Search for a tag or a username'
           value={searchText}
           onChange={handleSearchChange}
           required
-          className="search_input peer"
+          className='search_input peer'
         />
       </form>
 
-      {/* Show search prompts by username,tags,words or show all prompts */}
-      {searchText? (
-        <PromptCardList 
+      {/* All Prompts */}
+      {searchText ? (
+        <PromptCardList
           data={searchedResults}
-          handleTagClick = {handleTagClick}
+          handleTagClick={handleTagClick}
         />
-      ):(
-        <PromptCardList 
-        data={allPosts}
-        handleTagClick = {handleTagClick}
-        />
+      ) : (
+        <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}
 
     </section>
-  )
+  );
+
 }
 
 export default Feed
