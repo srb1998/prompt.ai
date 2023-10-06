@@ -6,10 +6,10 @@ import PromptCard from "./PromptCard";
 const PromptCardList = ({data,handleTagClick}) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((post)=>(
+      {data.map((p)=>(
         <PromptCard 
-          key={post._id}
-          post = {post}
+          key={p._id}
+          post = {p}
           handleTagClick={handleTagClick}
         />
       ))}
@@ -32,7 +32,7 @@ const Feed = () => {
       const data = await response.json();
       setAllPosts(data);
     }
-    
+    console.log(allPosts)
     fetchPosts();
   },[]);
 
