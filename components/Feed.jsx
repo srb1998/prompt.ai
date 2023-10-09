@@ -6,10 +6,10 @@ import PromptCard from "./PromptCard";
 const PromptCardList = ({data,handleTagClick}) => {
   return (
     <div className="mt-16 prompt_layout">
-      {data.map((p)=>(
+      {data.map((post)=>(
         <PromptCard 
-          key={p._id}
-          post = {p}
+          key={post._id}
+          post = {post}
           handleTagClick={handleTagClick}
         />
       ))}
@@ -25,7 +25,6 @@ const Feed = () => {
   const [ searchTimeout, setSeachTimeout ] = useState(null);
   const [ searchedResults, setSearchedResults ] = useState([])
 
-
   useEffect(()=>{
     const fetchPosts = async() => {
       const response = await fetch("/api/prompt");
@@ -33,7 +32,7 @@ const Feed = () => {
       setAllPosts(data);
     }
     console.log(allPosts)
-    fetchPosts();
+    fetchPosts(allPosts);
   },[]);
 
   // Search Funtionality
